@@ -1,37 +1,23 @@
 <?php
+// 1. Leer el JSON (misma carpeta que Login.php)
+$usuarios = json_decode(file_get_contents(__DIR__ .. '../users/users.json'), true);
 
+// 2. Recoger los datos: GET o POST, lo que llegue
+$user = $_GET['user']  ?? $_POST['user']  ?? null;
+$pass = $_GET['password'] ?? $_POST['password'] ?? null;
 
-
-  if( ($_GET["name"]=="Aitor") && ($_GET["passwd"]=="qazqaz123") ) {
-     echo "Benvingut ". $_GET['name']. "</br>";
-     exit(0);
-  }
-  else {
-	  echo "No tens permís per accedir a aquesta web<br>";
-	  exit(1);
-  }
-
-$nombre = $_POST['name'];
-$email  = $_POST['passwd'];
-
-$archivo = '/OrderManagmentApp/users/users.json';
-
-iif (file_exists($archivo)) {
-    $datos = json_decode(file_get_contents($archivo), true) ?: [];
-} else {
-    $datos = [];
-    file_put_contents($archivo, json_encode($datos, JSON_PRETTY_PRINT));
+// 3. Verificar
+$ok = false;
+foreach ($usuarios as $u) {
+    if ($user === $u['user'] && $pass === $u['password']) {
+        $ok = true;
+        break;
+    }
 }
 
-
-$datos[] = [
-    'name' => $name,
-    'passwd'  => $passwd
-];
-
-if (file_put_contents($archivo, json_encode($datos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
-    echo 'Datos guardados correctamente.';
+// 4. Responder
+if ($ok) {
+    echo "Welcome to the command options of the " . htmlspecialchars($user) . "<br>";
 } else {
-    http_response_code(500);    
-    echo 'Error al guardar los datos.';
+    echo "No tens permís per accedir a aquesta web<br>";
 }

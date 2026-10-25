@@ -1,23 +1,29 @@
 <?php
-// 1. Leer el JSON (misma carpeta que Login.php)
-$usuarios = json_decode(file_get_contents(__DIR__ .. '../users/users.json'), true);
+$json = file_get_contents(__DIR__ . '/../../users/users.json');
+$datos = json_decode(preg_replace('/^\xEF\xBB\xBF/', '', $json), true);
 
-// 2. Recoger los datos: GET o POST, lo que llegue
-$user = $_GET['user']  ?? $_POST['user']  ?? null;
-$pass = $_GET['password'] ?? $_POST['password'] ?? null;
+$nombre = trim($_REQUEST['name'] ?? '');
+$passwd = trim($_REQUEST['passwd'] ?? '');
 
-// 3. Verificar
 $ok = false;
-foreach ($usuarios as $u) {
-    if ($user === $u['user'] && $pass === $u['password']) {
+foreach ($datos as $u) {
+    if (trim($u['user']) === $nombre && trim($u['password']) === $passwd) {
         $ok = true;
-        break;
     }
 }
 
-// 4. Responder
-if ($ok) {
-    echo "Welcome to the command options of the " . htmlspecialchars($user) . "<br>";
-} else {
-    echo "No tens permís per accedir a aquesta web<br>";
+if (!$ok) {
+    die('Usuario o contraseña incorrectos');
 }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+    <p>welcome Admin, here you can add commands. Acces to them and seen them adn see a particular user!</p><br>
+    <button><p>add commands</p></button>
+</body>
+</html>

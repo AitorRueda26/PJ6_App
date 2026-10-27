@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="../client/form.css">
+</head>
+<body>
+    <form id="formComanda" method="post" action="../server/formulari_commands.php">
+        <h1>Form to request products</h1>
+
+        <label for="codi">ID of the command</label>
+        <input type="text" id="codi" name="codi"><br><br>
+
+        <label for="nom">Name and Surname of the client</label>
+        <input type="text" id="nom" name="nom"><br><br>
+
+        <label for="adreca">Location:</label>
+        <input type="text" id="adreca" name="adreca"><br><br>
+
+        <label for="email">email:</label>
+        <input type="email" id="email" name="email"><br><br>
+
+        <label for="telefon">Telephone number</label>
+        <input type="tel" id="telefon" name="telefon"><br><br>
+
+        <label>Products</label><br>
+        <input type="checkbox" class="check-prod" data-index="0"> Red velvet - 10,00 €
+        <input type="number" name="quantitat0" min="0" value="0" disabled><br>
+        <input type="checkbox" class="check-prod" data-index="1"> Cheesecake - 15,50 €
+        <input type="number" name="quantitat1" min="0" value="0" disabled><br>
+        <input type="checkbox" class="check-prod" data-index="2"> chocolate cake - 15,75 €
+        <input type="number" name="quantitat2" min="0" value="0" disabled><br>
+        <input type="checkbox" class="check-prod" data-index="3"> lemon cake - 8,99 €
+        <input type="number" name="quantitat3" min="0" value="0" disabled><br><br>
+
+        <button type="submit">Enviar comanda</button>
+        <a href="./../client/interface_admin.html"><button>Go back</button></a>
+    </form>
+
+    <script>
+        document.querySelectorAll('.check-prod').forEach(function (check) {
+            check.addEventListener('change', function () {
+                var q = document.querySelector('input[name="quantitat' + this.dataset.index + '"]');
+                q.disabled = !this.checked;
+                if (!this.checked) q.value = 0;
+            });
+        });
+    </script>
+</body>
+</html>

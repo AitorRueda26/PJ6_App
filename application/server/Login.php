@@ -9,21 +9,13 @@ $ok = false;
 foreach ($datos as $u) {
     if (trim($u['user']) === $nombre && trim($u['password']) === $passwd) {
         $ok = true;
+        break;
     }
 }
 
 if (!$ok) {
     die('Usuario o contraseña incorrectos');
 }
+
+header('Location: ./../client/interface_admin.html');
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin</title>
-</head>
-<body>
-    <p>welcome Admin, here you can add commands. Acces to them and seen them adn see a particular user!</p><br>
-    <button><p>add commands</p></button>
-</body>
-</html>

@@ -1,0 +1,36 @@
+[
+    {
+        "codi": "4",
+        "nom": "Aitor Frederic Rueda Ulloa",
+        "adreca": "Glories",
+        "email": "448789.clot@fje.edu",
+        "telefon": "242654464345",
+        "productes": [
+            {
+                "producte": "Producte 1",
+                "quantitat": 2,
+                "import": 20
+            }
+        ],
+        "subtotal": 20,
+        "iva": 0,
+        "total": 24.2
+    },
+    {
+        "codi": "4",
+        "nom": "Aitor Frederic Rueda Ulloa",
+        "adreca": "Glories",
+        "email": "448789.clot@fje.edu",
+        "telefon": "242654464345",
+        "productes": [
+            {
+                "producte": "Producte 1",
+                "quantitat": 2,
+                "import": 20
+            }
+        ],
+        "subtotal": 20,
+        "iva": 0,
+        "total": 24.2
+    }
+]
